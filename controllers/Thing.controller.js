@@ -1,3 +1,4 @@
+const NotFoundError = require('../errors/NotFoundError');
 const { Thing } = require('../models/index');
 
 module.exports.createThing = async (req, res, next) => {
@@ -8,7 +9,7 @@ module.exports.createThing = async (req, res, next) => {
         if(createdThing) {
             return res.status(201).send(createdThing)
         } else {
-            return res.status(400).send();
+            throw new ReferenceError('Reference Error! (createThing - controller)');
         }
     } catch (error) {
         next(error);
@@ -29,8 +30,12 @@ module.exports.getOne = async (req, res, next) => {
     try {
         const thing = await Thing.findByPk(id);
 
-        // потенційно, тут могла бути перевірка, чи повернулись нам якісь значення
+        if(thing.length > 0) {
         return res.status(200).send(thing);
+        }
+        else {
+            throw new NotFoundError('err.message');
+        }
     } catch (error) {
         next(error);
     }
