@@ -8,4 +8,4 @@ CREATE TABLE things (
 );
 
 
---- INSERT INTO things (body) VALUES ('some body text');
+INSERT INTO things (body) VALUES ('some body text');
