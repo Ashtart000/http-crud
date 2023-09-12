@@ -34,7 +34,7 @@ module.exports.getOne = async (req, res, next) => {
         return res.status(200).send(thing);
         }
         else {
-            throw new NotFoundError('err.message');
+            throw new NotFoundError();
         }
     } catch (error) {
         next(error);
